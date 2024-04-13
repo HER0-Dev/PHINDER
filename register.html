@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>PHINDER</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>PHINDER</h1>
+        <h2>Rejestracja</h2>
+    </div>
+        
+    <form method="post" action="register.php" enctype="multipart/form-data">
+        <div class="input-group">
+          <label>Imię</label>
+          <input type="text" name="first_name" required>
+        </div>
+        <div class="input-group">
+          <label>Nazwisko</label>
+          <input type="text" name="last_name" required>
+        </div>
+        <div class="input-group">
+          <label>Nazwa użytkownika</label>
+          <input type="text" name="username" required>
+        </div>
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" name="email" required>
+        </div>
+        <div class="input-group">
+          <label>Hasło</label>
+          <input type="password" name="password_1" required>
+        </div>
+        <div class="input-group">
+          <label>Potwierdź hasło</label>
+          <input type="password" name="password_2" required>
+        </div>
+        <div class="input-group">
+          <label>Zdjęcie profilowe</label>
+          <input type="file" name="profile_picture" required>
+        </div>
+        <div class="input-group">
+          <button type="submit" class="btn" name="reg_user">Zarejestruj się</button>
+        </div>
+        <p>
+                Już jesteś członkiem? <a href="login.html">Zaloguj się</a>
+        </p>
+    </form>
+</body>
+</html>

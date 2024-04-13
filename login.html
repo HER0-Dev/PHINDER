@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanie</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Zaloguj się</h2>
+        <form action="login.php" method="post">
+            <div class="input-group">
+                <label for="username">Nazwa użytkownika</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Hasło</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" name="login_user">Zaloguj się</button>
+        </form>
+        <p>Nie masz konta? <a href="register.html">Zarejestruj się</a></p>
+    </div>
+</body>
+</html>
