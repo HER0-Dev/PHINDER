@@ -1,58 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const likeButton = document.getElementById('like-button');
-    const dislikeButton = document.getElementById('dislike-button');
-    const userCard = document.getElementById('user-card');
-    const userImage = document.getElementById('user-image');
-    const userName = document.getElementById('user-name');
+    const likeButtons = document.querySelectorAll('.like-button');
+    const dislikeButtons = document.querySelectorAll('.dislike-button');
 
-    let users = [
-        { id: 1, name: 'Jan Kowalski', image: 'path/to/jan.jpg' },
-        { id: 2, name: 'Anna Nowak', image: 'path/to/anna.jpg' },
-    ];
-    let currentUserIndex = 0;
-
-    function showUser() {
-        const user = users[currentUserIndex];
-        userImage.src = user.image;
-        userName.textContent = user.name;
+    function updateUserCard(userId, action) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'update_user.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Zaktualizuj panel z danymi użytkownika
+                    document.getElementById('app').innerHTML = response.html;
+                } else {
+                    console.error('Błąd:', response.message);
+                }
+            }
+        };
+        xhr.send(`id=${userId}&action=${action}`);
     }
 
-    function fetchUsers() {
-        fetch('fetch_users.php')
-            .then(response => response.json())
-            .then(data => {
-                users = data;
-                showUser();
-            })
-            .catch(error => console.error('Error:', error));
-    }
+    likeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.getAttribute('data-id');
+            updateUserCard(userId, 'like');
+        });
+    });
 
-    function nextUser() {
-        currentUserIndex++;
-        if (currentUserIndex >= users.length) {
-            currentUserIndex = 0;
-        }
-        showUser();
-    }
-
-    function handleLike() {
-        const userId = likeButton.getAttribute('data-id');
-        // Logika obsługi "Like"
-        console.log('Like', userId);
-        // Tutaj możesz dodać logikę do zapisania "Like" na serwerze
-        nextUser();
-    }
-
-    function handleDislike() {
-        const userId = dislikeButton.getAttribute('data-id');
-        // Logika obsługi "Dislike"
-        console.log('Dislike', userId);
-        // Tutaj możesz dodać logikę do zapisania "Dislike" na serwerze
-        nextUser();
-    }
-
-    likeButton.addEventListener('click', handleLike);
-    dislikeButton.addEventListener('click', handleDislike);
-
-    fetchUsers();
+    dislikeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.getAttribute('data-id');
+            updateUserCard(userId, 'dislike');
+        });
+    });
 });

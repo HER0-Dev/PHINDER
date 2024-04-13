@@ -1,11 +1,11 @@
 <?php
-session_start(); // Upewnij się, że sesja jest zainicjowana
+session_start();
 include('config.php');
 
 if (isset($_POST['update_profile'])) {
-    // Sprawdź, czy użytkownik jest zalogowany
+
     if (!isset($_SESSION['user']) || !isset($_SESSION['user']['id'])) {
-        // Przekieruj użytkownika do strony logowania lub wyświetl błąd
+
         header("location: login.html");
         exit();
     }
@@ -15,7 +15,6 @@ if (isset($_POST['update_profile'])) {
     $age = $_POST['age'];
     $hobby = $_POST['hobby'];
 
-    // Zaktualizuj profil użytkownika za pomocą zapytania przygotowanego
     $stmt = $db->prepare("UPDATE users SET description = ?, age = ?, hobby = ? WHERE id = ?");
     $stmt->bind_param("siss", $description, $age, $hobby, $user_id);
 

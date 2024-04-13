@@ -72,7 +72,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Animacja przesuwania kart */
 .card.like {
     transform: translateX(-100%);
 }

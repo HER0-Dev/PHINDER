@@ -4,7 +4,6 @@ include('config.php');
 if (isset($_POST['user_id'])) {
     $user_id = mysqli_real_escape_string($db, $_POST['user_id']);
 
-    // Sprawdzamy, czy istnieje dopasowanie
     $sql = "SELECT * FROM matches WHERE user1_id = '$user_id' OR user2_id = '$user_id'";
     $result = mysqli_query($db, $sql);
 

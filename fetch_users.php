@@ -1,7 +1,7 @@
 <?php
 include('config.php');
 
-$sql = "SELECT id, name, image FROM users"; // Zmień zapytanie na swoją strukturę tabeli
+$sql = "SELECT id, name, image FROM users";
 $result = mysqli_query($db, $sql);
 
 $users = array();
